@@ -16,7 +16,8 @@ Before implementing or reviewing substantial code, read:
 3. `rules/ANDROID.md`
 4. `rules/COMPOSE.md`
 5. `rules/UI_UX.md`
-6. `rules/VERIFICATION.md`
+6. `rules/GRADLE.md`
+7. `rules/VERIFICATION.md`
 
 Apply only rules relevant to the task, but the hard constraints in CODE_QUALITY always apply.
 
@@ -61,7 +62,8 @@ Before declaring completion:
 - UI follows Android conventions;
 - accessibility and large text are considered;
 - placeholder/TODO implementation is absent unless explicitly requested;
-- relevant build/tests are run when tools are available.
+- relevant build/tests are run when tools are available;
+- on Windows, use the project's `gradlew.bat` when present instead of requiring global Gradle.
 
 ## Design behavior
 
