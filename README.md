@@ -15,6 +15,7 @@ rules/
   ANDROID.md             # Android-native behavior and platform rules
   COMPOSE.md             # Jetpack/Compose Multiplatform implementation rules
   UI_UX.md               # anti-generic design direction and UX quality
+  GRADLE.md              # Gradle Wrapper + Windows terminal build rules
   VERIFICATION.md        # build, test and release checklist
 SOURCES.md               # upstream inspiration and licenses
 ```
@@ -36,4 +37,6 @@ For a stricter workflow, clone or vendor this repository into the project and po
 - No handwritten source file over **377 lines**.
 - No god files, god ViewModels, grab-bag utilities, hidden mutable state or placeholder implementations.
 - Android UI should feel native, not like a website squeezed into a phone.
+- On Windows, use the project's `gradlew.bat` when available.
+- The full Gradle Wrapper belongs in each app repository; this rules repo intentionally does not freeze one Gradle version.
 - Build and verification are part of completion.
