@@ -2,9 +2,18 @@
 
 Do not claim production-ready completion without checking what can be checked in the available environment.
 
-For Gradle/Windows wrapper setup, follow `GRADLE.md`.
+For Gradle/Windows setup, follow `GRADLE.md`.
 
-## 1. Code checks
+## 1. Build security preflight
+
+Before running the build:
+- `gradle-wrapper.properties` exists;
+- `distributionSha256Sum` is present;
+- wrapper changes were reviewed/verified when upgraded;
+- `gradle/verification-metadata.xml` is present for projects that have completed dependency-verification setup;
+- verification metadata is not regenerated automatically during ordinary builds.
+
+## 2. Code checks
 
 Before finishing:
 - imports resolve;
@@ -15,81 +24,35 @@ Before finishing:
 - no TODO/FIXME placeholders unless explicitly accepted;
 - platform-specific APIs stay in platform-specific code.
 
-## 2. Build
+## 3. Build
 
-For Android on Windows, if the wrapper exists, use it rather than a global Gradle installation:
+On Windows, use the project wrapper:
 
 ```powershell
 .\gradlew.bat :app:assembleDebug
 ```
 
-Use the actual module task if the project differs, e.g.:
+Use the actual module task if the project differs.
 
-```powershell
-.\gradlew.bat :composeApp:assembleDebug
-```
+`gradlew.bat --version` is only a toolchain check; it does not build the APK.
 
-For KMP/Desktop also compile/package the relevant desktop target when it is part of the requested deliverable.
+## 4. Tests
 
-`gradlew.bat --version` is only a wrapper/toolchain check; it does not build the APK.
+Run relevant unit tests when available. Prioritize domain rules, state transitions and regressions.
 
-## 3. Tests
-
-Run relevant unit tests when available.
-
-Prioritize tests for:
-- domain rules;
-- parsers/formatters;
-- reducers/state transitions;
-- repositories with meaningful logic;
-- regressions being fixed.
-
-Do not write meaningless tests only to increase count.
-
-## 4. Android runtime pass
+## 5. Android runtime pass
 
 When adb/emulator/device is available, check:
 - app launches;
-- primary navigation works;
-- Back works;
-- keyboard does not cover inputs/actions;
+- navigation and Back work;
+- keyboard/insets;
 - light/dark;
 - large font scale;
 - empty/error/loading states;
-- permission denial path where relevant.
+- permission denial paths where relevant.
 
-## 5. Visual checks
+## 6. Completion report
 
-Inspect for:
-- clipped text;
-- unsafe insets;
-- broken scrolling;
-- tiny hit targets;
-- inconsistent spacing;
-- accidental raw colors;
-- over-nested cards;
-- off-platform controls;
-- layout breakage on different window sizes.
-
-## 6. Performance sanity
-
-Watch for:
-- heavy work on main thread;
-- non-lazy long lists;
-- repeated expensive composition work;
-- decoding full-size images for tiny thumbnails;
-- uncontrolled coroutine scopes;
-- unnecessary startup work.
-
-Optimize measured/obvious problems, not hypothetical nanoseconds.
-
-## 7. Completion report
-
-When reporting completion, state:
-- what changed;
-- what build/test commands succeeded;
-- what could not be verified;
-- any remaining known limitation.
+State what changed, what build/tests succeeded, what could not be verified, and known limitations.
 
 Never imply an APK was built just because Gradle launched successfully.
-Never imply a device/runtime check happened if only static code was reviewed.
