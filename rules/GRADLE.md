@@ -19,6 +19,8 @@ For a different module, use that module's task, for example:
 
 Do not require or install a global Gradle when the project wrapper exists.
 
+For this workstation's fixed local paths and helper BAT convention, also read `LOCAL_WINDOWS.md`.
+
 ## 2. Wrapper belongs to the project
 
 A complete Gradle Wrapper normally includes:
@@ -40,11 +42,11 @@ The wrapper version is project-specific and should be defined by that project's 
 
 ## 3. Do not copy a random wrapper between projects blindly
 
-Reusing the wrapper files is technically possible, but only when the target Gradle version is compatible with that project's Android Gradle Plugin / Kotlin setup.
+Reusing wrapper files is technically possible, but only when the target Gradle version is compatible with that project's Android Gradle Plugin / Kotlin setup.
 
 Prefer generating or updating the wrapper for the actual project, then committing it there.
 
-The reusable repository `code_rules` should contain rules, not a frozen wrapper binary tied to one Gradle version.
+The reusable repository `code_rules` should contain rules and helper-script templates, not a frozen wrapper binary tied to one Gradle version.
 
 ## 4. Java and Android SDK on Windows
 
@@ -57,15 +59,11 @@ $env:JAVA_HOME
 $env:ANDROID_HOME
 ```
 
-If Android Studio's bundled JDK is intentionally used, `JAVA_HOME` may point to its `jbr` directory.
+General rule: portable repositories should not hardcode machine-specific JDK paths.
 
-Example shape:
+**Single-workstation exception for these projects:** repositories intended only for the configured workstation may use the fixed paths from `LOCAL_WINDOWS.md` inside helper BAT files.
 
-```text
-<Android Studio>\jbr
-```
-
-Do not hardcode one user's machine path into application repositories.
+Do not hardcode full repository paths; scripts should use their own directory via `%~dp0`.
 
 ## 5. First wrapper run
 
@@ -125,4 +123,6 @@ After generating it, include:
 git add gradlew gradlew.bat gradle
 ```
 
-Do not add Gradle caches or generated build directories.
+Project helper scripts such as `build-debug.bat` and `install-debug.bat` should also be committed.
+
+Do not add Gradle caches, APK outputs or generated build directories.
