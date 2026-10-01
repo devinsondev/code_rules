@@ -17,7 +17,8 @@ Before implementing or reviewing substantial code, read:
 4. `rules/COMPOSE.md`
 5. `rules/UI_UX.md`
 6. `rules/GRADLE.md`
-7. `rules/VERIFICATION.md`
+7. `rules/LOCAL_WINDOWS.md`
+8. `rules/VERIFICATION.md`
 
 Apply only rules relevant to the task, but the hard constraints in CODE_QUALITY always apply.
 
@@ -63,7 +64,8 @@ Before declaring completion:
 - accessibility and large text are considered;
 - placeholder/TODO implementation is absent unless explicitly requested;
 - relevant build/tests are run when tools are available;
-- on Windows, use the project's `gradlew.bat` when present instead of requiring global Gradle.
+- on Windows, use the project's `gradlew.bat` when present instead of requiring global Gradle;
+- for repositories intended for the configured local workstation, include/update the simple helper BAT when useful.
 
 ## Design behavior
 
