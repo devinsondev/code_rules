@@ -2,6 +2,8 @@
 
 Do not claim production-ready completion without checking what can be checked in the available environment.
 
+For Gradle/Windows wrapper setup, follow `GRADLE.md`.
+
 ## 1. Code checks
 
 Before finishing:
@@ -15,10 +17,10 @@ Before finishing:
 
 ## 2. Build
 
-For Android, prefer running the project's wrapper:
+For Android on Windows, if the wrapper exists, use it rather than a global Gradle installation:
 
 ```powershell
-.\gradlew.bat assembleDebug
+.\gradlew.bat :app:assembleDebug
 ```
 
 Use the actual module task if the project differs, e.g.:
@@ -29,7 +31,7 @@ Use the actual module task if the project differs, e.g.:
 
 For KMP/Desktop also compile/package the relevant desktop target when it is part of the requested deliverable.
 
-Do not require a globally installed Gradle when the project has a wrapper.
+`gradlew.bat --version` is only a wrapper/toolchain check; it does not build the APK.
 
 ## 3. Tests
 
@@ -89,4 +91,5 @@ When reporting completion, state:
 - what could not be verified;
 - any remaining known limitation.
 
+Never imply an APK was built just because Gradle launched successfully.
 Never imply a device/runtime check happened if only static code was reviewed.
