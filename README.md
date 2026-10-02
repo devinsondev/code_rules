@@ -1,61 +1,74 @@
 # code_rules
 
-Opinionated AI coding rules for Android-first applications, with Kotlin Multiplatform support when Android + Windows share one product.
+Single-source AI coding standard for Android-first applications, with Kotlin Multiplatform support when Android + Windows intentionally share one product.
 
-The repository is intentionally **text-first**. No npm runtime, no installed CLI and no hooks are required. It also contains tiny BAT templates that can be copied into app repositories.
+## One instruction for the AI
 
-## Structure
+Use exactly this entry point:
 
-```text
-SKILL.md                 # entry point and precedence
-AGENTS.md                # short bootstrap for coding agents
-rules/
-  CODE_QUALITY.md        # 377-line rule, anti-god-file, naming, complexity
-  ARCHITECTURE.md        # feature-first architecture, KMP boundaries
-  ANDROID.md             # Android-native behavior and platform rules
-  COMPOSE.md             # Jetpack/Compose Multiplatform implementation rules
-  UI_UX.md               # anti-generic design direction and UX quality
-  GRADLE.md              # Gradle Wrapper + Windows terminal build rules
-  LOCAL_WINDOWS.md       # fixed paths/workflow for the target workstation
-  VERIFICATION.md        # build, test and release checklist
-templates/
-  build-debug.bat        # reusable local build helper
-  install-debug.bat      # optional build + adb install helper
-SOURCES.md               # upstream inspiration and licenses
+> Read https://github.com/devinsondev/code_rules/blob/main/SKILL.md and follow it as the single source of truth. Modify the target GitHub repository until it satisfies READY FOR USER PULL.
+
+You do **not** need to separately tell the agent to read every file under `rules/`. `SKILL.md` is canonical and takes precedence.
+
+## Intended workflow
+
+The AI edits/pushes the application repository.
+
+On the configured Windows workstation, the normal user workflow is then:
+
+```powershell
+cd D:\ORDERED_CODE\PHONE\APPS\<repo>
+git pull --ff-only
+.\build-debug.bat
 ```
 
-## How to use
+The project-local BAT must fail closed unless the Gradle wrapper, official distribution checksum, wrapper-JAR checksum, dependency verification metadata, JDK and Android SDK all pass preflight.
 
-Tell the coding agent:
+Normal builds use strict Gradle dependency verification.
 
-> Read https://github.com/devinsondev/code_rules/blob/main/SKILL.md and follow it for this project.
+## Fixed workstation
 
-## Local Android workflow
-
-Projects are expected under:
+Projects:
 
 ```text
 D:\ORDERED_CODE\PHONE\APPS\<repo>
 ```
 
-On the configured workstation, an app repository can contain its own `build-debug.bat`, so the normal workflow becomes:
+Android Studio JBR:
 
-```powershell
-git pull
-.\build-debug.bat
+```text
+D:\TOOLS\andrstdio\jbr
 ```
 
-The BAT sets the known JDK/SDK environment and invokes the project's own Gradle Wrapper.
+Android SDK:
 
-## Core defaults
+```text
+%LOCALAPPDATA%\Android\Sdk
+```
 
-- Kotlin + Compose.
-- Kotlin Multiplatform when Android and Windows should share product logic/UI.
-- Feature-first organization.
-- Platform code kept thin.
-- No handwritten source file over **377 lines**.
-- No god files, god ViewModels, grab-bag utilities, hidden mutable state or placeholder implementations.
-- Android UI should feel native, not like a website squeezed into a phone.
-- On Windows, use the project's `gradlew.bat` when available.
-- The full Gradle Wrapper belongs in each app repository.
-- Build and verification are part of completion.
+## Repository structure
+
+```text
+SKILL.md                 # SINGLE CANONICAL STANDARD
+AGENTS.md                # tells agents to use SKILL.md
+rules/                   # optional deeper references
+templates/
+  build-debug.bat        # fail-closed secure build template
+  install-debug.bat      # build + adb install helper
+SOURCES.md
+```
+
+## Core guarantees expected from generated projects
+
+- complete Gradle Wrapper committed;
+- official Gradle distribution SHA-256 pinned;
+- trusted wrapper-JAR SHA-256 checked before Gradle runs;
+- `gradle/verification-metadata.xml` committed;
+- strict dependency verification on normal builds;
+- no automatic regeneration of trusted hashes during ordinary builds;
+- tests + debug assemble in `build-debug.bat`;
+- no `git pull` inside the BAT;
+- no secrets/keystores/build outputs committed;
+- Kotlin/Compose code-quality and Android UX rules from `SKILL.md`.
+
+Supporting rule files may add detail, but `SKILL.md` always wins.
