@@ -1,15 +1,11 @@
 # Agent bootstrap
 
-Read `SKILL.md` first and follow every referenced rule file relevant to the task.
+Read `SKILL.md` first.
 
-Hard constraints:
-- handwritten source files: max 377 lines;
-- no god files/classes/ViewModels/composables;
-- feature-first organization;
-- keep Android/desktop platform code thin;
-- no business logic in Compose UI;
-- build/test before claiming completion when tooling is available;
-- on Windows, prefer the project's `.\gradlew.bat`; do not require global Gradle when a wrapper exists.
+`SKILL.md` is the single canonical source of truth for this repository's Android engineering, GitHub workflow, Gradle supply-chain checks, Windows BAT behavior, architecture, verification and completion criteria.
 
-For Android UI work also read `rules/ANDROID.md`, `rules/COMPOSE.md`, and `rules/UI_UX.md`.
-For build/tooling work also read `rules/GRADLE.md` and `rules/VERIFICATION.md`.
+Do not substitute an older rule file for the canonical standard.
+
+A target Android repository is not complete until it satisfies the `READY FOR USER PULL` definition in `SKILL.md`.
+
+Supporting files under `rules/` are optional deeper references only.
