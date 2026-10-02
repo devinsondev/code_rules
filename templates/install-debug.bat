@@ -1,28 +1,28 @@
 @echo off
-setlocal
+setlocal EnableExtensions
 
 cd /d "%~dp0"
 
-set "JAVA_HOME=D:\TOOLS\andrstdio\jbr"
-set "ANDROID_HOME=%LOCALAPPDATA%\Android\Sdk"
-set "PATH=%JAVA_HOME%\bin;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\cmdline-tools\latest\bin;%PATH%"
-
-set "WRAPPER_PROPS=gradle\wrapper\gradle-wrapper.properties"
-if not exist "%WRAPPER_PROPS%" (
-    echo ERROR: Missing %WRAPPER_PROPS%
-    exit /b 1
-)
-
-findstr /b /c:"distributionSha256Sum=" "%WRAPPER_PROPS%" >nul
-if errorlevel 1 (
-    echo ERROR: Gradle wrapper has no distributionSha256Sum.
-    exit /b 1
-)
-
-call gradlew.bat :app:assembleDebug
+call build-debug.bat
 if errorlevel 1 exit /b 1
 
-adb install -r "app\build\outputs\apk\debug\app-debug.apk"
+set "ANDROID_HOME=%LOCALAPPDATA%\Android\Sdk"
+set "PATH=%ANDROID_HOME%\platform-tools;%PATH%"
+set "APK=app\build\outputs\apk\debug\app-debug.apk"
+
+if not exist "%APK%" (
+    echo ERROR: APK not found at %APK%
+    exit /b 1
+)
+
+adb get-state >nul 2>&1
+if errorlevel 1 (
+    echo ERROR: No authorized Android device is available through ADB.
+    echo Check: adb devices
+    exit /b 1
+)
+
+adb install -r "%APK%"
 if errorlevel 1 exit /b 1
 
 echo.
