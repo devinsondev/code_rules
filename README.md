@@ -1,27 +1,40 @@
-# code_rules — coding standards for AI agents
+# code_rules — стандарты разработки с ИИ
 
-Библиотека профильных инструкций для разработки качественного кода. Выберите стандарт под конкретный проект: **не применяйте Android-правила к браузерным расширениям**.
+Библиотека независимых инструкций для качественного кода. **Каждая платформа — в своей папке** и со своим основным `SKILL.md`.
 
-| Проект | Каноническая инструкция |
-| --- | --- |
-| Android / Kotlin / Compose | [SKILL.md](SKILL.md) |
-| Расширения Chrome + Firefox | [browser-extensions/SKILL.md](browser-extensions/SKILL.md) |
+| Платформа | Основная инструкция | Дополнительно |
+| --- | --- | --- |
+| Android / Kotlin / Jetpack Compose / KMP | [android/SKILL.md](android/SKILL.md) | [Правила и шаблоны](android/README.md) |
+| Chrome + Firefox WebExtensions | [browser-extensions/SKILL.md](browser-extensions/SKILL.md) | [Правила и пример](browser-extensions/README.md) |
 
-## Готовый промпт для ИИ: браузерные расширения
+## Готовые промпты для ИИ
 
-> Прочитай https://github.com/devinsondev/code_rules/blob/main/browser-extensions/SKILL.md и соблюдай его как основной стандарт. Проверь проект, реализуй задачу, запусти доступные тесты и честно укажи, прошли ли проверки Chrome и Firefox.
+**Android:**
 
-## Готовый промпт для ИИ: Android
+> Прочитай https://github.com/devinsondev/code_rules/blob/main/android/SKILL.md и соблюдай этот стандарт при разработке Android-приложений. Доработай целевой репозиторий до состояния READY FOR USER PULL, сообщив о реально выполненных проверках.
 
-> Read https://github.com/devinsondev/code_rules/blob/main/SKILL.md and follow it as the single source of truth. Modify the target GitHub repository until it satisfies READY FOR USER PULL.
+**Chrome / Firefox:**
 
-## Профили
+> Прочитай https://github.com/devinsondev/code_rules/blob/main/browser-extensions/SKILL.md и соблюдай этот стандарт при разработке расширений браузеров. Проверяй заявленные браузеры и сообщи, достигнут ли статус READY TO RELEASE.
 
-- [Android SKILL.md](SKILL.md) — прежний, неизменный стандарт: Kotlin/Compose, Gradle Wrapper, SHA-256, Windows BAT, READY FOR USER PULL.
-- [Browser extensions](browser-extensions/README.md) — Manifest V3, WebExtensions, безопасная архитектура, Chrome/Firefox, проверка и публикация.
+## Структура
 
-## Расширение библиотеки
+```text
+README.md                           # общий каталог
+AGENTS.md                           # выбор стандарта
+android/
+  README.md
+  AGENTS.md
+  SKILL.md                          # главный Android-стандарт
+  SOURCES.md
+  rules/                            # Android / Compose / архитектура / UX / Gradle
+  templates/                        # build-debug.bat / install-debug.bat
+browser-extensions/
+  README.md
+  SKILL.md                          # главный стандарт Chrome + Firefox
+  SOURCES.md
+  rules/
+  examples/minimal-mv3/
+```
 
-Каждый новый стек помещать в отдельную папку `<profile>/SKILL.md` с проверяемым Definition of Done, вспомогательными `rules/` и ссылками на официальную документацию. В существующих профилях `SKILL.md` остается единственным главным источником правил.
-
-**Правило:** тестируемый, безопасный, сопровождаемый код важнее красивых обещаний.
+Android-специфичные настройки Gradle, JBR, SDK и BAT относятся **только** к `android/`. Для нового стека создайте `<profile>/SKILL.md`, собственные `rules/` и источники, затем дополните этот индекс и `AGENTS.md`.
