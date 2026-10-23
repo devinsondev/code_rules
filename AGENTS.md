@@ -1,11 +1,8 @@
-# Agent bootstrap
+# Coding-standard router
 
-Read `SKILL.md` first.
+This repository stores **independent** AI engineering standards. Select exactly the relevant profile:
+- Android/Kotlin: root [SKILL.md](SKILL.md); existing root `rules/`, `templates/`, Gradle/Windows requirements stay Android-only.
+- Chrome/Firefox extensions: [browser-extensions/SKILL.md](browser-extensions/SKILL.md). Use this profile's `rules/` references for details.
+- Mixed project: scope each standard only to its component. Other ecosystems: no standard is defined yet.
 
-`SKILL.md` is the single canonical source of truth for this repository's Android engineering, GitHub workflow, Gradle supply-chain checks, Windows BAT behavior, architecture, verification and completion criteria.
-
-Do not substitute an older rule file for the canonical standard.
-
-A target Android repository is not complete until it satisfies the `READY FOR USER PULL` definition in `SKILL.md`.
-
-Supporting files under `rules/` are optional deeper references only.
+Within each profile, that profile's SKILL.md is canonical. Validate version-sensitive facts against official platform docs. Never claim builds, runtime tests or store approvals that were not performed. Preserve other profiles when expanding the repository.
