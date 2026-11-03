@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | Android / Kotlin / Jetpack Compose / KMP | [android/SKILL.md](android/SKILL.md) | [Правила и шаблоны](android/README.md) |
 | Chrome + Firefox WebExtensions | [browser-extensions/SKILL.md](browser-extensions/SKILL.md) | [Правила и пример](browser-extensions/README.md) |
+| Дизайн аддонов (чёрный/оранжевый, бежевый/оранжевый) | [browser-extensions/design/SKILL.md](browser-extensions/design/SKILL.md) | [Готовые CSS-токены](browser-extensions/design/tokens.css) |
 
 ## Готовые промпты для ИИ
 
@@ -34,6 +35,8 @@ browser-extensions/
   SKILL.md                          # главный стандарт Chrome + Firefox
   SOURCES.md
   rules/
+  design/SKILL.md                 # независимый скилл UI/UX для аддонов
+  design/tokens.css              # локальные переменные двух тем
   examples/minimal-mv3/
 ```
 

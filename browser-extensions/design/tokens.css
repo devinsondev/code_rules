@@ -1,0 +1,130 @@
+/* Original design tokens for extension-owned UI. No remote imports/assets. */
+/* Default: warm light palette. Explicit themes override OS preference. */
+:root {
+  color-scheme: light;
+  --ui-bg: #F6F0E6;
+  --ui-surface: #FFF9F1;
+  --ui-raised: #FFFCF7;
+  --ui-text: #2A251F;
+  --ui-muted: #655B51;
+  --ui-border: #D8CABC;
+  --ui-control-outline: #927B65;
+  --ui-accent: #B84A00;
+  --ui-accent-hover: #923A00;
+  --ui-on-accent: #FFFFFF;
+  --ui-accent-subtle: #FBE1C8;
+  --ui-focus: #B84A00;
+  --ui-danger: #B42318;
+  --ui-success: #16714D;
+  --ui-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ui-radius-sm: 8px;
+  --ui-radius-md: 12px;
+  --ui-radius-lg: 16px;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-6: 24px;
+  --ui-space-8: 32px;
+}
+
+/* Apply for the explicit dark override. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-bg: #101113;
+  --ui-surface: #191B1E;
+  --ui-raised: #22252A;
+  --ui-text: #F7F3ED;
+  --ui-muted: #BDB9B3;
+  --ui-border: #393B3F;
+  --ui-control-outline: #81868C;
+  --ui-accent: #FF9D3F;
+  --ui-accent-hover: #FFAF64;
+  --ui-on-accent: #1C1208;
+  --ui-accent-subtle: #3B2A1C;
+  --ui-focus: #FFB35E;
+  --ui-danger: #FF9C91;
+  --ui-success: #78D6A6;
+}
+
+/* No data-theme attribute = follow the system preference. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --ui-bg: #101113;
+    --ui-surface: #191B1E;
+    --ui-raised: #22252A;
+    --ui-text: #F7F3ED;
+    --ui-muted: #BDB9B3;
+    --ui-border: #393B3F;
+    --ui-control-outline: #81868C;
+    --ui-accent: #FF9D3F;
+    --ui-accent-hover: #FFAF64;
+    --ui-on-accent: #1C1208;
+    --ui-accent-subtle: #3B2A1C;
+    --ui-focus: #FFB35E;
+    --ui-danger: #FF9C91;
+    --ui-success: #78D6A6;
+  }
+}
+
+/* Scoped sample primitives. Do not style the host page globally. */
+.extension-ui {
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font: 14px/1.45 var(--ui-font);
+}
+
+.extension-ui .surface {
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  padding: var(--ui-space-4);
+}
+
+.extension-ui .primary-action {
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-sm);
+  padding: 10px 14px;
+  min-height: 40px;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.extension-ui .primary-action:hover:not(:disabled) {
+  background: var(--ui-accent-hover);
+}
+
+.extension-ui :where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+
+.extension-ui .muted {
+  color: var(--ui-muted);
+}
+
+.extension-ui .metric-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.extension-ui .field {
+  color: var(--ui-text);
+  background: var(--ui-raised);
+  border: 1px solid var(--ui-control-outline);
+  border-radius: var(--ui-radius-sm);
+  min-height: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .extension-ui *,
+  .extension-ui *::before,
+  .extension-ui *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

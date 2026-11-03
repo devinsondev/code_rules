@@ -12,6 +12,10 @@
 - [Verification and release](rules/VERIFICATION.md)
 - [Official sources](SOURCES.md)
 
+### Design skill
+
+[Ink & Orange / Sand & Orange](design/SKILL.md) — original UI/UX instructions for popups, sidebars and options; [local CSS color tokens](design/tokens.css). Dark = black + orange; light = beige + orange. No third-party design skills, purple gradients or remote UI assets.
+
 ### Example
 [Minimal MV3 starter](examples/minimal-mv3/README.md): a dependency-free action popup sending a message to shared background code. No host permissions, remote code or data collection.
 

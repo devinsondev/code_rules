@@ -42,6 +42,8 @@ Applies only to **Chrome and Firefox WebExtensions**, not Android. This file win
 ## 4. Architecture, UI and performance
 
 - Separate `background`, `content`, `popup/options`, shared core, storage and browser adapters as applicable. No god files, accidental global state or needless abstractions.
+- Handwritten source files must remain **at most 377 lines** each (TS, JS, HTML, CSS); split near 300 by responsibility, without compressed formatting or god modules.
+- For new extension-owned UI without an existing brand direction, apply the original [black/orange + beige/orange design skill](design/SKILL.md); explicit user branding takes precedence. The design skill never relaxes the security/compatibility rules here.
 - Use structured, versionable JSON-compatible message types and runtime validation. Chrome and Firefox differ in serialization; avoid nonportable objects. For async messaging, use a verified browser-compatible listener strategy, not indiscriminate `async` listener functions.
 - Persist schema/version and test migrations and concurrent writes.
 - Content scripts must be scoped, idempotent, safe to detach and non-disruptive to the website. Minimize observers, injected CSS, DOM scans and permissions.

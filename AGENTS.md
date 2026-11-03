@@ -4,6 +4,7 @@ This repository contains **separate platform-specific coding standards**. Select
 
 - **Android / Kotlin / Jetpack Compose / Kotlin Multiplatform:** read [android/SKILL.md](android/SKILL.md). Android-only reference files are in `android/rules/`, `android/templates/` and `android/SOURCES.md`. Its completion definition is READY FOR USER PULL.
 - **Chrome / Firefox WebExtensions:** read [browser-extensions/SKILL.md](browser-extensions/SKILL.md). Its references are in `browser-extensions/rules/`. Its completion definition is READY TO RELEASE.
+- **WebExtension visual design:** [browser-extensions/design/SKILL.md](browser-extensions/design/SKILL.md) specifies the black/orange and beige/orange UI for new Chrome/Firefox extensions. It supplements, never overrides, browser-extensions/SKILL.md.
 - **Mixed product:** apply each standard only to its corresponding component.
 - **Other technology:** no official profile yet; do not substitute an unrelated standard.
 
